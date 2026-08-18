@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jiyul Choi — Activities Portfolio</title>
+<style>
+  :root{
+    --navy:#0a2540;
+    --navy-light:#12385f;
+    --gold:#c9a94a;
+    --gold-light:#e6cd8a;
+    --cream:#faf7f0;
+    --ink:#1a1a1a;
+    --muted:#6b7280;
+    --border:#e6e1d6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Georgia','Noto Serif KR',serif;
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  .sans{font-family:'Helvetica Neue',Arial,'Noto Sans KR',sans-serif;}
+
+  /* NAV */
+  nav{
+    position:sticky;top:0;z-index:100;
+    background:rgba(10,37,64,0.97);
+    backdrop-filter:blur(6px);
+    padding:16px 24px;
+    display:flex;justify-content:space-between;align-items:center;
+    flex-wrap:wrap;gap:10px;
+  }
+  nav .brand{color:var(--gold-light);font-weight:bold;font-size:1.1rem;letter-spacing:0.5px;}
+  nav .links{display:flex;gap:22px;flex-wrap:wrap;font-family:'Helvetica Neue',Arial,sans-serif;}
+  nav .links a{color:#dfe6ee;text-decoration:none;font-size:0.85rem;letter-spacing:0.5px;text-transform:uppercase;transition:color .2s;}
+  nav .links a:hover{color:var(--gold-light);}
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(155deg,var(--navy) 0%,var(--navy-light) 55%,#1c4a73 100%);
+    color:#fff;
+    padding:90px 24px 70px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(circle at 20% 20%, rgba(201,169,74,0.15), transparent 45%),
+               radial-gradient(circle at 80% 80%, rgba(201,169,74,0.12), transparent 45%);
+  }
+  .hero-inner{position:relative;z-index:1;max-width:760px;margin:0 auto;}
+  .hero .eyebrow{
+    font-family:'Helvetica Neue',Arial,sans-serif;
+    text-transform:uppercase;letter-spacing:3px;font-size:0.8rem;color:var(--gold-light);margin-bottom:18px;
+  }
+  .hero h1{font-size:clamp(2.2rem,5vw,3.4rem);font-weight:400;margin-bottom:14px;letter-spacing:0.5px;}
+  .hero h1 span{color:var(--gold-light);font-style:italic;}
+  .hero p.tagline{font-size:1.05rem;color:#c9d4e0;max-width:600px;margin:0 auto 30px;font-family:'Helvetica Neue',Arial,sans-serif;font-weight:300;}
+  .hero .stats{
+    display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:36px;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  .hero .stat{text-align:center;}
+  .hero .stat .num{font-size:1.9rem;color:var(--gold-light);font-weight:700;}
+  .hero .stat .lbl{font-size:0.72rem;letter-spacing:1px;text-transform:uppercase;color:#9fb1c4;margin-top:4px;}
+
+  /* SECTIONS */
+  section.block{max-width:1100px;margin:0 auto;padding:80px 24px;}
+  section.block.alt{background:#fff;}
+  .section-head{text-align:center;max-width:680px;margin:0 auto 50px;}
+  .section-head .kicker{
+    font-family:'Helvetica Neue',Arial,sans-serif;text-transform:uppercase;letter-spacing:2.5px;
+    font-size:0.75rem;color:var(--gold);font-weight:700;margin-bottom:10px;
+  }
+  .section-head h2{font-size:clamp(1.7rem,3.5vw,2.3rem);font-weight:400;color:var(--navy);}
+  .section-head p{color:var(--muted);margin-top:14px;font-family:'Helvetica Neue',Arial,sans-serif;font-size:0.95rem;}
+
+  /* GALLERY GRID */
+  .gallery{
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:16px;
+  }
+  .gallery figure{
+    position:relative;border-radius:6px;overflow:hidden;cursor:pointer;
+    aspect-ratio:4/5;background:#eee;box-shadow:0 3px 10px rgba(0,0,0,0.08);
+    transition:transform .25s, box-shadow .25s;
+  }
+  .gallery figure:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(0,0,0,0.16);}
+  .gallery figure img{width:100%;height:100%;object-fit:cover;display:block;}
+  .gallery figure figcaption{
+    position:absolute;bottom:0;left:0;right:0;padding:10px 12px 8px;
+    background:linear-gradient(transparent,rgba(0,0,0,0.65));
+    color:#fff;font-family:'Helvetica Neue',Arial,sans-serif;font-size:0.72rem;letter-spacing:0.3px;
+    opacity:0;transition:opacity .2s;
+  }
+  .gallery figure:hover figcaption{opacity:1;}
+
+  /* NARRATIVE / STAT CARDS */
+  .impact-row{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin:34px 0 46px;
+  }
+  .impact-card{
+    background:var(--navy);color:#fff;border-radius:10px;padding:24px 20px;text-align:center;
+    box-shadow:0 6px 18px rgba(10,37,64,0.18);
+  }
+  .impact-card .num{font-size:2rem;color:var(--gold-light);font-weight:700;font-family:'Helvetica Neue',Arial,sans-serif;}
+  .impact-card .lbl{font-family:'Helvetica Neue',Arial,sans-serif;font-size:0.78rem;letter-spacing:0.5px;color:#c9d4e0;margin-top:6px;text-transform:uppercase;}
+
+  .story{
+    background:#fff;border:1px solid var(--border);border-radius:12px;padding:32px;margin-bottom:40px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.04);
+  }
+  .story h3{color:var(--navy);font-size:1.3rem;margin-bottom:10px;font-weight:400;}
+  .story .tag{
+    display:inline-block;font-family:'Helvetica Neue',Arial,sans-serif;font-size:0.68rem;letter-spacing:1px;
+    text-transform:uppercase;background:var(--gold);color:#fff;padding:4px 10px;border-radius:20px;margin-bottom:14px;
+  }
+  .story p{color:#333;font-size:0.98rem;}
+
+  /* VIDEO */
+  .video-wrap{
+    max-width:520px;margin:0 auto;border-radius:10px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,0.18);
+    border:6px solid #fff;
+  }
+  video{width:100%;display:block;background:#000;}
+
+  /* CERT GRID */
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;}
+  .cert-card{
+    background:#fff;border:1px solid var(--border);border-radius:10px;overflow:hidden;
+    box-shadow:0 4px 14px rgba(0,0,0,0.05);cursor:pointer;transition:transform .2s;
+  }
+  .cert-card:hover{transform:translateY(-3px);}
+  .cert-card img{width:100%;display:block;aspect-ratio:1.3/1;object-fit:cover;object-position:top;}
+  .cert-card .cap{
+    padding:12px 14px;font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  .cert-card .cap .t{font-size:0.85rem;font-weight:700;color:var(--navy);}
+  .cert-card .cap .s{font-size:0.72rem;color:var(--muted);margin-top:2px;}
+
+  /* FOOTER */
+  footer{
+    background:var(--navy);color:#c9d4e0;text-align:center;padding:50px 24px 40px;
+    font-family:'Helvetica Neue',Arial,sans-serif;
+  }
+  footer .name{color:var(--gold-light);font-family:Georgia,serif;font-size:1.2rem;margin-bottom:8px;}
+  footer p{font-size:0.8rem;color:#7f93a8;margin-top:14px;}
+
+  /* LIGHTBOX */
+  .lightbox{
+    display:none;position:fixed;inset:0;background:rgba(5,10,20,0.92);z-index:1000;
+    align-items:center;justify-content:center;padding:30px;
+  }
+  .lightbox.active{display:flex;}
+  .lightbox img{max-width:92vw;max-height:88vh;border-radius:6px;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
+  .lightbox .close{position:absolute;top:20px;right:30px;color:#fff;font-size:2rem;cursor:pointer;font-family:sans-serif;}
+
+  @media (max-width:640px){
+    nav .links{gap:14px;}
+    section.block{padding:56px 18px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">JIYUL CHOI</div>
+  <div class="links">
+    <a href="#story">Overview</a>
+    <a href="#seasus">SEASUS</a>
+    <a href="#app">Award Compass</a>
+    <a href="#baseball">Baseball</a>
+    <a href="#paws">PAWS &amp; Key Club</a>
+    <a href="#korean">Korean School</a>
+    <a href="#certs">Certificates</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Common App Activities Portfolio</div>
+    <h1>Jiyul Choi <span>— In Action</span></h1>
+    <p class="tagline">Mill Creek High School · Class of 2027 · Prospective Business / MIS major<br>
+    A visual record of five years of leadership, service, and independent initiative.</p>
+    <div class="stats">
+      <div class="stat"><div class="num">460+</div><div class="lbl">Total Service &amp; Activity Hours</div></div>
+      <div class="stat"><div class="num">4</div><div class="lbl">Forage Finance Internships</div></div>
+      <div class="stat"><div class="num">1</div><div class="lbl">Self-Built iOS App</div></div>
+      <div class="stat"><div class="num">Silver</div><div class="lbl">Congressional Award Medal</div></div>
+    </div>
+  </div>
+</header>
+
+<section class="block" id="story">
+  <div class="section-head">
+    <div class="kicker">The Throughline</div>
+    <h2>From Volunteer to Founder</h2>
+    <p>What started as showing up to serve became a habit of building — recognizing a need and creating the structure to meet it, whether that meant launching a recycling drive or an app.</p>
+  </div>
+  <div class="impact-row">
+    <div class="impact-card"><div class="num">125+</div><div class="lbl">Hrs · SEASUS</div></div>
+    <div class="impact-card"><div class="num">92</div><div class="lbl">Hrs · PAWS + Key Club</div></div>
+    <div class="impact-card"><div class="num">120+</div><div class="lbl">Hrs · Baseball</div></div>
+    <div class="impact-card"><div class="num">46+</div><div class="lbl">Award Compass Users</div></div>
+  </div>
+</section>
+
+<section class="block alt" id="seasus">
+  <div class="section-head">
+    <div class="kicker">Community Leadership</div>
+    <h2>SEASUS — Glass Recycling &amp; Community Events</h2>
+    <p>Southeast Asian community nonprofit serving metro Atlanta.</p>
+  </div>
+  <div class="story">
+    <span class="tag">Consistent Commitment</span>
+    <h3>From Event Volunteer to Steady Environmental Habit</h3>
+    <p>Jiyul began as a SEASUS event volunteer, staffing Korean Festival and Kimchi Day for crowds of 100+ attendees. Alongside that event work, he built a consistent personal habit of environmental service — visiting the Gwinnett County glass recycling site monthly to responsibly recycle 10+ bottles each time, month after month, for a combined 125+ hours of service.</p>
+  </div>
+  <div class="gallery">
+    <figure onclick="openLightbox('assets/seasus/seasus_01.jpg')"><img src="assets/seasus/seasus_01.jpg" loading="lazy"><figcaption>Glass recycling drop-off</figcaption></figure>
+    <figure onclick="openLightbox('assets/seasus/seasus_02.jpg')"><img src="assets/seasus/seasus_02.jpg" loading="lazy"><figcaption>Monthly recycling run</figcaption></figure>
+    <figure onclick="openLightbox('assets/seasus/seasus_03.jpg')"><img src="assets/seasus/seasus_03.jpg" loading="lazy"><figcaption>Gwinnett Glass Recycling</figcaption></figure>
+    <figure onclick="openLightbox('assets/seasus/seasus_04.jpg')"><img src="assets/seasus/seasus_04.jpg" loading="lazy"><figcaption>Sorting bottles</figcaption></figure>
+    <figure onclick="openLightbox('assets/seasus/seasus_05.jpg')"><img src="assets/seasus/seasus_05.jpg" loading="lazy"><figcaption>SEASUS volunteer visit</figcaption></figure>
+    <figure onclick="openLightbox('assets/seasus/seasus_06.jpg')"><img src="assets/seasus/seasus_06.jpg" loading="lazy"><figcaption>Recycling drive</figcaption></figure>
+    <figure onclick="openLightbox('assets/seasus/seasus_07.jpg')"><img src="assets/seasus/seasus_07.jpg" loading="lazy"><figcaption>Community service</figcaption></figure>
+    <figure onclick="openLightbox('assets/seasus/seasus_08.jpg')"><img src="assets/seasus/seasus_08.jpg" loading="lazy"><figcaption>Bottle collection</figcaption></figure>
+    <figure onclick="openLightbox('assets/seasus/seasus_09.jpg')"><img src="assets/seasus/seasus_09.jpg" loading="lazy"><figcaption>SEASUS initiative</figcaption></figure>
+    <figure onclick="openLightbox('assets/seasus/seasus_10.jpg')"><img src="assets/seasus/seasus_10.jpg" loading="lazy"><figcaption>Consistent monthly effort</figcaption></figure>
+  </div>
+</section>
+
+<section class="block" id="app">
+  <div class="section-head">
+    <div class="kicker">Independent Project · Founder</div>
+    <h2>Award Compass — iOS App</h2>
+    <p>Founded and built a live App Store app tracking Congressional Award progress.</p>
+  </div>
+  <div class="impact-row">
+    <div class="impact-card"><div class="num">23→46+</div><div class="lbl">Users in 1 Month</div></div>
+    <div class="impact-card"><div class="num">5.0</div><div class="lbl">App Store Rating</div></div>
+    <div class="impact-card"><div class="num">Live</div><div class="lbl">On the App Store</div></div>
+  </div>
+  <div class="gallery">
+    <figure onclick="openLightbox('assets/app/app_01.jpg')"><img src="assets/app/app_01.jpg" loading="lazy"><figcaption>Award Compass app icon</figcaption></figure>
+    <figure onclick="openLightbox('assets/app/app_02.jpg')"><img src="assets/app/app_02.jpg" loading="lazy"><figcaption>App Store listing — 5.0 rating</figcaption></figure>
+    <figure onclick="openLightbox('assets/app/app_03.jpg')"><img src="assets/app/app_03.jpg" loading="lazy"><figcaption>In-app progress tracker</figcaption></figure>
+  </div>
+</section>
+
+<section class="block alt" id="baseball">
+  <div class="section-head">
+    <div class="kicker">Athletics</div>
+    <h2>Baseball — Team &amp; Recreational League</h2>
+    <p>Three years of competitive baseball: one on the Mill Creek HS team, two in a recreational league. 120+ hours building teamwork, discipline, and resilience.</p>
+  </div>
+  <div class="video-wrap">
+    <video controls preload="metadata" poster="assets/baseball/baseball_1.jpg">
+      <source src="assets/baseball/baseball_video.mp4" type="video/mp4">
+      Your browser does not support embedded video.
+    </video>
+  </div>
+  <div style="height:34px;"></div>
+  <div class="gallery">
+    <figure onclick="openLightbox('assets/baseball/baseball_1.jpg')"><img src="assets/baseball/baseball_1.jpg" loading="lazy"><figcaption>Batting cage preparation</figcaption></figure>
+    <figure onclick="openLightbox('assets/baseball/baseball_2.jpg')"><img src="assets/baseball/baseball_2.jpg" loading="lazy"><figcaption>Diving defensive play</figcaption></figure>
+    <figure onclick="openLightbox('assets/baseball/baseball_3.jpg')"><img src="assets/baseball/baseball_3.jpg" loading="lazy"><figcaption>Off-season strength training</figcaption></figure>
+    <figure onclick="openLightbox('assets/baseball/baseball_4.jpg')"><img src="assets/baseball/baseball_4.jpg" loading="lazy"><figcaption>Team celebration</figcaption></figure>
+  </div>
+</section>
+
+<section class="block" id="paws">
+  <div class="section-head">
+    <div class="kicker">Community Service</div>
+    <h2>PAWS &amp; Key Club</h2>
+    <p>Three years contributing to animal welfare (PAWS, 44 hrs) and school/community service (Key Club, 48 hrs) — shelter care, adoption events, and fundraising.</p>
+  </div>
+  <div class="gallery">
+    <figure onclick="openLightbox('assets/paws/paws_21.jpg')"><img src="assets/paws/paws_21.jpg" loading="lazy"><figcaption>PAWS shelter volunteering</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_22.jpg')"><img src="assets/paws/paws_22.jpg" loading="lazy"><figcaption>Animal care</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_23.jpg')"><img src="assets/paws/paws_23.jpg" loading="lazy"><figcaption>Dog walking</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_24.jpg')"><img src="assets/paws/paws_24.jpg" loading="lazy"><figcaption>Adoption event</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_25.jpg')"><img src="assets/paws/paws_25.jpg" loading="lazy"><figcaption>Shelter care</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_26.jpg')"><img src="assets/paws/paws_26.jpg" loading="lazy"><figcaption>PAWS United volunteering</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_27.jpg')"><img src="assets/paws/paws_27.jpg" loading="lazy"><figcaption>Animal welfare service</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_28.jpg')"><img src="assets/paws/paws_28.jpg" loading="lazy"><figcaption>Community event</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_31_walk.jpg')"><img src="assets/paws/paws_31_walk.jpg" loading="lazy"><figcaption>PAWS United dog walk</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_32_adopt.jpg')"><img src="assets/paws/paws_32_adopt.jpg" loading="lazy"><figcaption>Adoption event setup</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_29_setup.jpg')"><img src="assets/paws/paws_29_setup.jpg" loading="lazy"><figcaption>Key Club carnival event setup</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_30_eggs.jpg')"><img src="assets/paws/paws_30_eggs.jpg" loading="lazy"><figcaption>Community egg-hunt cleanup volunteering</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_33_carnival1.jpg')"><img src="assets/paws/paws_33_carnival1.jpg" loading="lazy"><figcaption>Setting up tents for a Key Club event</figcaption></figure>
+    <figure onclick="openLightbox('assets/paws/paws_34_carnival2.jpg')"><img src="assets/paws/paws_34_carnival2.jpg" loading="lazy"><figcaption>Key Club community carnival</figcaption></figure>
+  </div>
+</section>
+
+<section class="block alt" id="korean">
+  <div class="section-head">
+    <div class="kicker">Community Service · Education</div>
+    <h2>St. Andrew Kim Korean School — Assistant Teacher</h2>
+    <p>Served 24 hours guiding elementary students through Korean grammar and pronunciation, mentoring small-group lessons at the school's True North program.</p>
+  </div>
+  <div class="gallery">
+    <figure onclick="openLightbox('assets/korean/korean_01.jpg')"><img src="assets/korean/korean_01.jpg" loading="lazy"><figcaption>Assisting with a classroom lesson</figcaption></figure>
+    <figure onclick="openLightbox('assets/korean/korean_02.jpg')"><img src="assets/korean/korean_02.jpg" loading="lazy"><figcaption>Mentoring students in a small-group activity</figcaption></figure>
+  </div>
+</section>
+
+<section class="block" id="certs">
+  <div class="section-head">
+    <div class="kicker">Recognition &amp; Credentials</div>
+    <h2>Awards &amp; Certificates</h2>
+    <p>The Congressional Award and seven completed professional/academic certifications.</p>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card" onclick="openLightbox('assets/certs/gold.jpg')">
+      <img src="assets/certs/gold.jpg" loading="lazy">
+      <div class="cap"><div class="t">Congressional Award — Gold Medal</div><div class="s">National youth honor</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/silver.jpg')">
+      <img src="assets/certs/silver.jpg" loading="lazy">
+      <div class="cap"><div class="t">Congressional Award — Silver Medal</div><div class="s">National youth honor</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/bronze.jpg')">
+      <img src="assets/certs/bronze.jpg" loading="lazy">
+      <div class="cap"><div class="t">Congressional Award — Bronze Medal</div><div class="s">National youth honor</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/jpmorgan.jpg')">
+      <img src="assets/certs/jpmorgan.jpg" loading="lazy">
+      <div class="cap"><div class="t">JPMorgan — Investment Banking</div><div class="s">Forage job simulation</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/goldman_controllers.jpg')">
+      <img src="assets/certs/goldman_controllers.jpg" loading="lazy">
+      <div class="cap"><div class="t">Goldman Sachs — Controllers</div><div class="s">Forage job simulation</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/goldman_risk.jpg')">
+      <img src="assets/certs/goldman_risk.jpg" loading="lazy">
+      <div class="cap"><div class="t">Goldman Sachs — Risk Management</div><div class="s">Forage job simulation</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/citi.jpg')">
+      <img src="assets/certs/citi.jpg" loading="lazy">
+      <div class="cap"><div class="t">Citi — Finance</div><div class="s">Forage job simulation</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/yale.jpg')">
+      <img src="assets/certs/yale.jpg" loading="lazy">
+      <div class="cap"><div class="t">Financial Markets</div><div class="s">Yale University · Coursera</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/wharton.jpg')">
+      <img src="assets/certs/wharton.jpg" loading="lazy">
+      <div class="cap"><div class="t">Financial Accounting</div><div class="s">Wharton (UPenn) · Coursera</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/google_pm.jpg')">
+      <img src="assets/certs/google_pm.jpg" loading="lazy">
+      <div class="cap"><div class="t">Project Management</div><div class="s">Google · Coursera</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/Digital_Marketing.jpg')">
+      <img src="assets/certs/Digital_Marketing.jpg" loading="lazy">
+      <div class="cap"><div class="t">Digital Marketing</div><div class="s">Certification</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/florida_expedition.jpg')">
+      <img src="assets/certs/florida_expedition.jpg" loading="lazy">
+      <div class="cap"><div class="t">Florida Coastal Expedition Report</div><div class="s">Congressional Award — self-led 5-day expedition</div></div>
+    </div>
+    <div class="cert-card" onclick="openLightbox('assets/certs/newl_korean.jpg')">
+      <img src="assets/certs/newl_korean.jpg" loading="lazy">
+      <div class="cap"><div class="t">NEWL Korean — Level 5</div><div class="s">National World Language Exam</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="name">Jiyul Choi</div>
+  <div>Mill Creek High School · Class of 2027</div>
+  <p>Prepared as a supplemental activities portfolio for college admissions review.</p>
+</footer>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="close" onclick="closeLightbox()">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function openLightbox(src){
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('active');
+}
+</script>
+
+</body>
+</html>
