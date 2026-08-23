@@ -129,13 +129,15 @@ section.block .quote{
 .linkrow a:hover{border-color:var(--accent);color:var(--accent)}
 
 .certGrid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  display:grid;grid-template-columns:repeat(4,1fr);
   gap:14px;margin-top:10px;
 }
 .certGrid figure{margin:0;text-align:center}
 .certGrid img{border-radius:10px;border:1px solid var(--line);background:#fff;cursor:zoom-in;transition:transform .25s ease}
 .certGrid figure:hover img{transform:scale(1.06)}
 .certGrid figcaption{font-size:.78rem;color:var(--muted);margin-top:8px}
+@media (max-width:820px){.certGrid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:420px){.certGrid{grid-template-columns:1fr}}
 
 footer{padding:50px 0 80px;text-align:center;color:var(--muted);font-size:.82rem}
 footer a{color:var(--muted)}
