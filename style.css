@@ -1,0 +1,158 @@
+:root{
+  --bg:#0f1115;
+  --bg-alt:#161922;
+  --card:#1b1f2a;
+  --text:#eef0f3;
+  --muted:#9aa3b2;
+  --accent:#ff6b52;
+  --accent-soft:rgba(255,107,82,.14);
+  --line:rgba(255,255,255,.08);
+  --maxw:1080px;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Pretendard,"Apple SD Gothic Neo","Malgun Gothic",Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+img,video{max-width:100%;display:block}
+a{color:var(--accent)}
+
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(15,17,21,.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+nav .wrap{display:flex;align-items:center;gap:18px;padding:14px 24px;overflow-x:auto;white-space:nowrap}
+nav .brand{font-weight:700;letter-spacing:.02em;margin-right:auto;flex-shrink:0}
+nav a{color:var(--muted);text-decoration:none;font-size:.86rem;flex-shrink:0}
+nav a:hover{color:var(--text)}
+
+/* HERO */
+header.hero{
+  padding:100px 0 70px;
+  text-align:center;
+  background:
+    radial-gradient(600px 300px at 50% -10%, var(--accent-soft), transparent 70%);
+}
+header.hero .badge{
+  display:inline-block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);border:1px solid var(--accent);border-radius:999px;
+  padding:5px 14px;margin-bottom:22px;
+}
+header.hero h1{font-size:clamp(2.1rem,5vw,3.4rem);margin:0 0 14px;letter-spacing:-.01em}
+header.hero p.tag{color:var(--muted);font-size:1.1rem;max-width:620px;margin:0 auto}
+
+.stats{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:14px;max-width:900px;margin:46px auto 0;
+}
+.stat{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:20px 14px;text-align:center;
+}
+.stat .num{font-size:1.6rem;font-weight:700;color:var(--accent)}
+.stat .label{font-size:.78rem;color:var(--muted);margin-top:4px}
+
+/* SECTIONS */
+section.block{padding:64px 0;border-top:1px solid var(--line)}
+section.block .kicker{color:var(--accent);font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+section.block h2{font-size:clamp(1.5rem,3vw,2rem);margin:6px 0 18px}
+section.block .lede{color:var(--muted);max-width:720px;margin-bottom:22px}
+section.block p{margin:0 0 14px;max-width:760px}
+section.block .quote{
+  border-left:3px solid var(--accent);padding:4px 0 4px 18px;
+  color:#d6dae2;font-style:italic;margin:20px 0;max-width:720px;
+}
+
+.miniStats{display:flex;flex-wrap:wrap;gap:10px;margin:18px 0 26px}
+.miniStats span{
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:6px 14px;font-size:.82rem;color:var(--muted);
+}
+.miniStats b{color:var(--text)}
+
+.gallery{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:12px;margin-top:10px;
+}
+.gallery figure{margin:0;border-radius:12px;overflow:hidden;background:var(--card);border:1px solid var(--line)}
+.gallery img,.gallery video{width:100%;height:230px;object-fit:cover;display:block;transition:transform .25s ease}
+.gallery img{cursor:zoom-in}
+.gallery figure:has(img):hover img{transform:scale(1.06)}
+.gallery figcaption{padding:10px 12px;font-size:.8rem;color:var(--muted)}
+
+/* Congressional Award: 2x2 category cards + certificate row */
+.categoryGrid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:14px;margin:10px 0 26px;
+}
+.catCard{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:22px 24px;
+}
+.catTitle{color:var(--accent);font-weight:700;font-size:.92rem;margin-bottom:8px}
+.catBody{color:var(--text);font-size:.92rem}
+@media (max-width:560px){.categoryGrid{grid-template-columns:1fr}}
+
+.medalRow{grid-template-columns:repeat(4,1fr)}
+.medalRow img{height:230px;object-fit:contain;background:#fff}
+@media (max-width:720px){.medalRow{grid-template-columns:repeat(2,1fr)}}
+
+/* Award Compass: tall linktree card + 2x2 grid alongside */
+.compassGallery{
+  grid-template-columns:1fr 1fr 1fr;
+  grid-auto-rows:230px;
+}
+.compassGallery figure.tall{grid-row:span 2}
+.compassGallery figure.tall img{height:100%}
+@media (max-width:720px){
+  .compassGallery{grid-template-columns:1fr 1fr}
+  .compassGallery figure.tall{grid-row:span 1}
+  .compassGallery figure.tall img{height:230px}
+}
+
+.linkrow{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px}
+.linkrow a{
+  font-size:.82rem;border:1px solid var(--line);border-radius:999px;padding:6px 14px;
+  text-decoration:none;color:var(--muted);
+}
+.linkrow a:hover{border-color:var(--accent);color:var(--accent)}
+
+.certGrid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:14px;margin-top:10px;
+}
+.certGrid figure{margin:0;text-align:center}
+.certGrid img{border-radius:10px;border:1px solid var(--line);background:#fff;cursor:zoom-in;transition:transform .25s ease}
+.certGrid figure:hover img{transform:scale(1.06)}
+.certGrid figcaption{font-size:.78rem;color:var(--muted);margin-top:8px}
+
+footer{padding:50px 0 80px;text-align:center;color:var(--muted);font-size:.82rem}
+footer a{color:var(--muted)}
+
+/* LIGHTBOX */
+.gallery img{cursor:zoom-in}
+#lightbox{
+  position:fixed;inset:0;z-index:999;display:none;
+  background:rgba(5,6,9,.92);
+  align-items:center;justify-content:center;
+  padding:36px;
+}
+#lightbox.open{display:flex}
+#lightbox img{max-width:min(92vw,1100px);max-height:88vh;border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#lightbox .lbClose{
+  position:absolute;top:20px;right:28px;
+  color:#fff;font-size:2rem;line-height:1;cursor:pointer;
+  background:none;border:none;
+}
+#lightbox .lbClose:hover{color:var(--accent)}
